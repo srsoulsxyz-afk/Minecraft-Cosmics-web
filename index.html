@@ -4,245 +4,122 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Minecraft Cosmics Tools</title>
-
   <style>
-    :root {
-      --bg: #0b0b0f;
-      --panel: #121317;
-      --accent: #8a3ffc;
-      --muted: #9aa0a6;
-      --white: #ffffff;
+    :root{
+      --bg:#0b0b0f;
+      --panel:#0f1114;
+      --accent:#8a3ffc;
+      --muted:#9aa0a6;
+      --white:#ffffff;
+    }
+    body{
+      margin:0;padding:0;background:var(--bg);color:var(--white);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto;
     }
 
-    * { box-sizing: border-box; }
+    /* TELA INICIAL */
+    #welcome-screen{
+      position:fixed;inset:0;background:#000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:20px;z-index:99999;transition:opacity .5s;
+    }
+    #welcome-screen h1{font-size:26px;margin:0}
+    #welcome-screen p{color:var(--muted);margin:0}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--white);
-      font-family: system-ui, sans-serif;
-      padding: 20px;
+    /* layout principal */
+    .container{
+      max-width:1100px;margin:auto;padding:32px;
+      display:flex;flex-direction:column;gap:30px;
     }
 
-    /* HEADER */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 16px;
+    /* título */
+    .header{display:flex;align-items:center;gap:16px}
+    .logo{
+      width:60px;height:60px;border-radius:14px;
+      background:linear-gradient(140deg,var(--accent),#5b2bff);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    /* GRID MAIS LARGO */
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:26px;margin-top:20px;
     }
 
-    .logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), #5b2bff);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
+    /* CARD */
+    .card{
+      background:#0f0f14;border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;
+      transition:transform .25s;
+    }
+    .card:hover{transform:translateY(-6px)}
+    .card p{color:var(--muted);font-size:14px}
+
+    .btn{
+      padding:12px 18px;border:0;border-radius:10px;
+      background:var(--accent);color:white;font-weight:700;
+      cursor:pointer;font-size:15px;text-align:center;text-decoration:none;
+      margin-top:auto;
     }
 
-    .titles h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .titles p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* LAYOUT */
-    .container {
-      max-width: 1080px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 24px;
-    }
-
-    @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* MAIN PANEL */
-    .main {
-      background: var(--panel);
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid rgba(138,63,252,0.18);
-    }
-
-    /* GRID (CARDS) */
-    .dash-grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    }
-
-    @media (max-width: 500px) {
-      .dash-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: #16171d;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(138,63,252,0.16);
-    }
-
-    .card h3 {
-      margin: 0 0 6px 0;
-      font-size: 16px;
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    /* DOWNLOAD BUTTON */
-    .btn-download {
-      margin-top: 14px;
-      padding: 10px 16px;
-      font-weight: 600;
-      font-size: 14px;
-      border-radius: 30px;
-      background: white;
-      color: black;
-      border: 0;
-      cursor: pointer;
-      width: 115px;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      background: var(--panel);
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(138,63,252,0.12);
-    }
-
-    .sidebar h4 {
-      margin: 0 0 12px 0;
-    }
-
-    .github {
-      display: flex;
-      gap: 10px;
-      padding: 10px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.05);
-      font-size: 14px;
-    }
   </style>
 </head>
-
 <body>
 
-  <div class="header">
-    <div class="brand">
-      <div class="logo">MC</div>
-      <div class="titles">
-        <h1>Minecraft Cosmics Tools</h1>
-        <p>Desenvolvido por Dizz</p>
-      </div>
-    </div>
-
-    <div style="
-      border: 1px dashed rgba(138,63,252,0.35);
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: var(--muted);
-    ">
-      Interface Escura • Bordas Roxas
-    </div>
+  <!-- TELA INICIAL -->
+  <div id="welcome-screen">
+    <h1>Minecraft Cosmics Tools</h1>
+    <p>Carregando interface...</p>
   </div>
 
+  <script>
+    window.addEventListener('DOMContentLoaded',()=>{
+      setTimeout(()=>{
+        const w=document.getElementById('welcome-screen');
+        w.style.opacity='0';
+        setTimeout(()=>w.remove(),500);
+      },1200);
+    });
+  </script>
+
   <div class="container">
-
-    <main class="main">
-      <h2 style="margin-top:0;margin-bottom:14px;">Dashboards</h2>
-
-      <div class="dash-grid">
-
-        <!-- Capcut -->
-        <article class="card">
-          <h3>Capcut Pro</h3>
-          <p>Versão otimizada para edição leve e rápida — 1.2 GB</p>
-
-          <div style="margin-top: 12px;">
-            <small style="color:var(--muted);">Tipo</small><br>
-            <strong>Editor de vídeo</strong>
-          </div>
-
-          <button class="btn-download">⬇️ Baixar</button>
-        </article>
-
-        <!-- Maps -->
-        <article class="card">
-          <h3>Minecraft Maps</h3>
-          <p>Pacote com mundos prontos — 450 MB</p>
-
-          <div style="margin-top: 12px;">
-            <small style="color:var(--muted);">Tipo</small><br>
-            <strong>Mapas</strong>
-          </div>
-
-          <button class="btn-download">⬇️ Baixar</button>
-        </article>
-
-        <!-- Textures -->
-        <article class="card">
-          <h3>Textures Pack</h3>
-          <p>Pacote PBR otimizado — 220 MB</p>
-
-          <div style="margin-top: 12px;">
-            <small style="color:var(--muted);">Tipo</small><br>
-            <strong>Recursos</strong>
-          </div>
-
-          <button class="btn-download">⬇️ Baixar</button>
-        </article>
-
+    <div class="header">
+      <div class="logo">MC</div>
+      <div>
+        <h2 style="margin:0">Minecraft Cosmics Tools</h2>
+        <p style="color:var(--muted);margin:0">By Dizz</p>
       </div>
-    </main>
+    </div>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <h4>Informações</h4>
-      <p style="color:var(--muted);font-size:13px;">
-        Links úteis e repositório.
-      </p>
+    <h3 style="margin:0">Ferramentas</h3>
 
-      <a class="github" href="https://github.com" target="_blank">
-        <strong>GitHub</strong>
-      </a>
+    <div class="grid">
 
-      <p style="margin-top:16px;font-size:13px;color:var(--muted);">
-        Versão: <strong>1.0.0</strong>
-      </p>
-    </aside>
+      <!-- CAPCUT PRO+ -->
+      <div class="card">
+        <h3>CapCut Pro+</h3>
+        <p>Abaixe esta versão do CapCut Pro para editar seus vídeos com mais recursos e fluidez.</p>
+        <a class="btn" href="https://www.mediafire.com/file/nc30sk3g0t7j8ue/Capcut_Pro_Atualizado_Na_vers%C3%A3o_15.6.0_%F0%9F%87%A7%F0%9F%87%B7%F0%9F%94%A5%5BGojozx1%5D.apk/file?dkey=m7y8qssnxzw&r=714" target="_blank">DOWNLOAD</a>
+      </div>
 
+      <!-- AFTER MOTION Z -->
+      <div class="card">
+        <h3>After Motion Z</h3>
+        <p>Consiga mais recursos para editar seus vídeos de forma rápida e fácil.</p>
+        <a class="btn" href="https://www.mediafire.com/file/q2vm4nlwf00jali/After+Motion+Z.apk/file" target="_blank">DOWNLOAD</a>
+      </div>
+
+      <!-- DISCORD -->
+      <div class="card">
+        <h3>Nosso Discord</h3>
+        <p>Entre no servidor para receber novidades, atualizações e suporte.</p>
+        <a class="btn" href="https://discord.gg/XHEezGB2HV" target="_blank">ENTRAR</a>
+      </div>
+
+    </div>
   </div>
 
 </body>
-  </html>
+          </html>
+          
